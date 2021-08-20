@@ -14,18 +14,15 @@
   
     <header>
       <div class="title">
-        <Contenteditable 
+        <input
           class="title-content"
           ref="titleContent"
           spellcheck="false" 
           :placeholder="placeholders.annotWrapperTitle"
           v-model="allData.pluginData.connectedFrameAliasName"
-          @input="handleTitleChange"
-          @keydown.enter="handleTitleChangeDone"
-          @blur="handleTitleChangeDone"
-          :key="allData.pluginData.connectedFrameId"
+          @keyup.enter="$event.target.blur()"
         />
-     
+          
         <Button
           class="title-button"
           buttonType="icon"
@@ -83,13 +80,12 @@
   import { Container, Draggable } from 'vue-smooth-dnd'
   import { store, mutations } from '@/store'
   import { generateAnnotItemObject } from '@/utils/utils'
-  import Contenteditable from '@/components/ui/Contenteditable'
   import Modal from '@/components/ui/Modal'
   import { config } from '@/utils/utils'
 
 
   export default {
-    components: { AnnotationItem, Container, Draggable, Button, Icon, Contenteditable, Modal },
+    components: { AnnotationItem, Container, Draggable, Button, Icon, Modal },
 
     computed: {
       'allData'() { return store.annotData.find(el => el.id === this.selectedWrapperFrameId) },
@@ -142,38 +138,25 @@
       },
 
 
-      // Contenteditable-related
+      // input-related
       handleTitleChangeIconClick() {
         this.$setFocusVisible(true)
-        const $el = this.$refs.titleContent.$el
-        $el.focus()
-        document.getSelection().collapse($el.firstChild, $el.firstChild.length)
+        this.$refs.titleContent.focus();
       },
+    },
 
-      handleTitleChange( newVal ) {
-        newVal = newVal.trim()
+    watch: {
+      'allData.pluginData.connectedFrameAliasName'( newVal ) {
         parent.postMessage({ pluginMessage: {
           type: 'pushAnnotWrapperTitleChange', 
           value: { 
             wrapperFrameId: this.selectedWrapperFrameId,
-            newVal
+            newVal: newVal.trim()
           }
         }}, '*')
       },
 
-      handleTitleChangeDone( e ) {
-        e.preventDefault()
-
-        // Empty the user-selection.
-        window.getSelection().empty()
-
-        // Remove focus.
-        this.$refs.titleContent.$el.blur()
-      }
-    },
-
-    watch: {
-      data_str( newAnnots_str, oldAnnots_str ) {
+      'data_str'( newAnnots_str, oldAnnots_str ) {
         if (!this.watchAnnotations) return
         parent.postMessage({ pluginMessage: {
           type: 'pushAnnotChanges', 
@@ -250,6 +233,12 @@
           cursor: text;
           max-width: 300px;
           line-height: 1.25;
+          transition: box-shadow 150ms ease;
+          border: none;
+          
+          &:hover {
+            box-shadow: inset 0 0 0 1px $color--special-black-1;
+          }
 
           &:empty:before {
             content: attr(placeholder);
