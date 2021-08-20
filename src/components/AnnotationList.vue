@@ -233,7 +233,6 @@
           cursor: text;
           max-width: 300px;
           line-height: 1.25;
-          transition: box-shadow 150ms ease;
           border: none;
           
           &:hover {
