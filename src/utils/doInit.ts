@@ -4,8 +4,13 @@ import {
 	generateFontNameConfig,
 	getAllAnnotWrapperNodes, 
 	setPluginData,
-	getAnnotItemNodesFromWrapper
+	getAnnotItemNodesFromWrapper,
+	getAnnotWrapperTitleTextNode
 } from '@/utils/utils'
+
+import {
+	generateAnnotWrapperTitleNode
+} from '@/utils/nodeGenerators'
 
 
 export default async () => {
@@ -22,6 +27,13 @@ export default async () => {
 
 	if (annotWrappers.length) {
 		for (const wrapperNode of annotWrappers) {
+			// If the wrapper has no title, it's a v1 one.
+			const isV1 = !getAnnotWrapperTitleTextNode(wrapperNode)
+			if (isV1) {
+				const titleNode = generateAnnotWrapperTitleNode('Annotations')
+				wrapperNode.insertChild(0, titleNode)
+			}
+
 			let annotData = getAnnotItemNodesFromWrapper(wrapperNode).map(itemNode => getPluginData(itemNode, config.annotItemNodePluginDataKey)),
 					pluginData = getPluginData(wrapperNode, config.annotWrapperNodePluginDataKey)
 
