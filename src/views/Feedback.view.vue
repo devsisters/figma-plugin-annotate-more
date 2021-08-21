@@ -71,7 +71,7 @@
         this.isError = false
 
         try {
-          const res = await fetch(store.functionsBaseUrl +  '/send-feedback-email', {
+          const res = await fetch(store.functionsBaseUrl +  '/annotate-it-send-feedback', {
             method: 'POST',
             body: JSON.stringify({ template })
           })

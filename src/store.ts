@@ -1,6 +1,6 @@
 import Vue from "vue"
 
-const baseDomain = 'https://annotate-it-functions.netlify.app'
+const baseDomain = 'https://netlify-functions-madebyfabian.netlify.app'
 
 export const store = Vue.observable({
   functionsBaseUrl: baseDomain + '/.netlify/functions'
