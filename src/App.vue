@@ -51,37 +51,7 @@
     data: () => ({
       isAboutViewOpened: false,
       isFeedbackViewOpened: false
-    }),
-
-    async mounted() {
-      // Analytics
-      try {
-        const apiRes = await fetch('https://json.geoiplookup.io/'), // alternative:  https://api.ipdata.co/?api-key=test
-              apiData = await apiRes.json()
-
-        const newData = {
-          // From IP API
-          user_ip: apiData.ip,
-          user_location: apiData.country_code,
-
-          // From Window
-          user_screen_resolution: `${window.screen.width}x${window.screen.height}`,
-
-          // From window.navigator
-          user_language: navigator.language,
-
-          // Gets parsed server-side.
-          _userAgent: navigator.userAgent
-        }
-
-        // await fetch(store.functionsBaseUrl + '/log-analytics', {
-        //   method: 'POST',
-        //   body: JSON.stringify(newData)
-        // })
-      } catch (error) {
-        console.error(error)
-      }
-    }
+    })
   };
 </script>
 
