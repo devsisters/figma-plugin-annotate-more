@@ -2,6 +2,7 @@
   "name": "Annotate it! v2",
   "id": "859894273811051899",
   "api": "1.0.0",
+  "editorType": [ "figma" ],
   "relaunchButtons": [
     { "command": "editAnnotations", "name": "Edit Annotations" },
     { "command": "editAnnotation", "name": "Edit this Annotation" }
