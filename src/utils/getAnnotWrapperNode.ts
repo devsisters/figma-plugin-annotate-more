@@ -96,21 +96,21 @@ export default ({ createOneIfItDoesNotExist = true, id = null } = {}) => {
 /**
  * Helper, Is used when the annotation wrapper is initially created.
  */
-const _calculateAnnotWrapperNodePos = ( wrapperData: { width: number, height: number }, startAtX?: number ) : { x: number, y: number } => {
+const _calculateAnnotWrapperNodePos = ( wrapperData: { width: number, height: number }, startAtY?: number ) : { x: number, y: number } => {
   // If there is no current sel, return x = y = 0
   let currSel = figma.currentPage.selection?.[0]
   if (!currSel)
     return { x: 0, y: 0 }
   currSel = _getNodeParentOnCanvas(currSel)
 
-  if (!startAtX)
-    startAtX = currSel.x + currSel.width
+  if (!startAtY)
+    startAtY = currSel.y + currSel.height
 
   const nodes = figma.currentPage.children.filter(node => {
-    return node.x + node.width >= startAtX
+    return node.y + node.height >= startAtY
   })
 
-  // Loop through every direct page child node, returning only the child with an x higher than the current selection. 
+  // Loop through every direct page child node, returning only the child with an y higher than the current selection. 
   let pageNodesPosArr = []
   for (const node of nodes) {
     pageNodesPosArr.push({ 
@@ -122,14 +122,14 @@ const _calculateAnnotWrapperNodePos = ( wrapperData: { width: number, height: nu
     })
   }
 
-  // Sort nodes by x position
-  pageNodesPosArr.sort((a, b) => a.xEnd - b.xEnd)
+  // Sort nodes by y position
+  pageNodesPosArr.sort((a, b) => a.yEnd - b.yEnd)
 
   let wantedWrapperPos = { 
     width:  wrapperData.width,
     height: wrapperData.height,
-    x:      startAtX + 160,
-    y:      currSel.y,
+    x:      currSel.x,
+    y:      startAtY + 80,
   }
 
   const detectedCollision = detectNodeCollisions(pageNodesPosArr, wantedWrapperPos).find(nodeObj => {
@@ -137,7 +137,7 @@ const _calculateAnnotWrapperNodePos = ( wrapperData: { width: number, height: nu
   })
 
   return detectedCollision
-    ? _calculateAnnotWrapperNodePos(wrapperData, detectedCollision.x + detectedCollision.width)
+    ? _calculateAnnotWrapperNodePos(wrapperData, detectedCollision.y + detectedCollision.height)
     : { x: wantedWrapperPos.x, y: wantedWrapperPos.y }
 }
 
