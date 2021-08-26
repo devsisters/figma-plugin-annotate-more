@@ -28,6 +28,7 @@ const generateParagraphBlock = ( contentBlock: ContentBlock, contentBlocksAmount
   let totalLength = 0
 
   const textNode = generateAnnotItemBodyTextNode()
+  console.clear()
 
   for (const textPart of contentBlock.content) {
     let textPartContent = textPart.type === 'hard_break' 
@@ -39,10 +40,16 @@ const generateParagraphBlock = ( contentBlock: ContentBlock, contentBlocksAmount
 
     if (textPart.type === 'text') {
       const end = totalLength + textPartContent.length,
-            { fontName, textDecoration } = _getTextMarkOptions(textPart?.marks)
+            { fontName, textDecoration, linkHref } = _getTextMarkOptions(textPart?.marks)
 
       textNode.setRangeFontName(start, end, fontName)
       textNode.setRangeTextDecoration(start, end, textDecoration)
+
+      if (linkHref) {
+        console.log(textPart, { linkHref, start, end} )
+
+        textNode.setRangeHyperlink(start, end - 1, linkHref)
+      }
     }
 
     totalLength += textPartContent.length
@@ -132,7 +139,8 @@ const generateListBlock = ( contentBlock: ContentBlock, nestingLevel: number) =>
 const _getTextMarkOptions = ( marks: Mark[] ) => {
   let isBold = false,
       isItalic = false,
-      textDecoration: TextDecoration = 'NONE'
+      textDecoration: TextDecoration = 'NONE',
+      linkHref: HyperlinkTarget = null
 
   if (marks)
     for (const mark of marks) {
@@ -141,12 +149,14 @@ const _getTextMarkOptions = ( marks: Mark[] ) => {
         case 'italic': isItalic = true; break
         case 'underline': textDecoration = 'UNDERLINE'; break
         case 'strike': if (textDecoration === 'NONE') textDecoration = 'STRIKETHROUGH'; break
+        case 'link': linkHref = { type: 'URL', value: mark.attrs.href }; textDecoration = 'UNDERLINE'; break
       }
     }
 
   return {
     fontName: generateFontNameConfig({ isBold, isItalic }),
-    textDecoration
+    textDecoration,
+    linkHref
   }
 }
 

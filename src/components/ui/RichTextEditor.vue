@@ -1,6 +1,6 @@
 <template>
   <div class="editor">
-    <editor-floating-menu :editor="editor" v-slot="{ commands, isActive, menu }">
+    <editor-floating-menu :editor="editor" v-slot="{ commands, menu }">
       <div
         class="editor-floatingMenu"
         :class="{ 'is-active': menu.isActive }"
@@ -47,7 +47,7 @@
 
 <script>
 import { Editor, EditorContent, EditorMenuBubble, EditorFloatingMenu } from 'tiptap'
-import { HardBreak, OrderedList, BulletList, ListItem, Bold, Italic, Strike, Underline, HorizontalRule, Placeholder, History } from 'tiptap-extensions'
+import { HardBreak, OrderedList, BulletList, ListItem, Bold, Italic, Strike, Underline, HorizontalRule, Placeholder, History, Link } from 'tiptap-extensions'
 
 export default {
   props: {
@@ -81,6 +81,9 @@ export default {
           new Underline(),
           new History(),
           new HorizontalRule(),
+          new Link({
+            openOnClick: false
+          }),
           new Placeholder({
             emptyEditorClass: 'is-editor-empty',
             emptyNodeClass: 'is-empty',

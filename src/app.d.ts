@@ -1,7 +1,7 @@
 declare global {
   // Text Editor
-  type Mark = { type: 'bold' | 'italic' | 'strike' | 'underline' }
-  type Attrs = { order: number }
+  type Mark = { type: 'bold' | 'italic' | 'strike' | 'underline' | 'link', attrs: any }
+  type Attrs = { order: number, href: HyperlinkTarget, target: string }
   type ContentBlock = {
     type: 'paragraph' | 'text' | 'hard_break' | 'bullet_list' | 'ordered_list' | 'horizontal_rule',
     content?: ContentBlock[],
