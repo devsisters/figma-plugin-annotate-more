@@ -135,9 +135,13 @@ export const generateAnnotItemObject = ( title = '', content = null ) : Annotati
 
 export const getUserColorThemes = () => {
   return [
-    { name: 'Blue', color: generateRGBA({ r: 24, g: 160, b: 251 }), id: 'blvbk3k2fj551h0p' },
-    { name: 'Red', color: generateRGBA({ r: 242, g: 72, b: 34 }), id: '25s8afhofkgi7185' },
-    { name: 'Green', color: generateRGBA({ r: 27, g: 196, b: 125 }), id: 'dd70jmjl2dp78sii' }
+    { name: 'Blue',   color: generateRGBA({ r: 24, g: 160, b: 251 }), id: 'blvbk3k2fj551h0p', requiresBlackTextColor: false },
+    { name: 'Red',    color: generateRGBA({ r: 242, g: 72, b: 34 }),  id: '25s8afhofkgi7185', requiresBlackTextColor: false },
+    { name: 'Green',  color: generateRGBA({ r: 27, g: 196, b: 125 }), id: 'dd70jmjl2dp78sii', requiresBlackTextColor: false },
+    { name: 'Purple', color: generateRGBA({ r: 123, g: 97, b: 255 }), id: '7zx1s1x0rERif4fj', requiresBlackTextColor: false },
+    { name: 'Black',  color: generateRGBA({ r: 0, g: 0, b: 0 }),      id: 'F4uwFNR4KsMCxZQS', requiresBlackTextColor: false },
+    { name: 'Yellow', color: generateRGBA({ r: 255, g: 235, b: 0 }),  id: 'gco61x7yDsffYFfy', requiresBlackTextColor: true },
+    { name: 'Orange', color: generateRGBA({ r: 242, g: 153, b: 74 }), id: '9V076lexJ1CI4s1f', requiresBlackTextColor: true },
   ].map(theme => ({ ...theme, color: figmaRGBAToRealRGBA(theme.color) }))
 }
 
@@ -233,12 +237,27 @@ export const updateAnnotItemBadgeColor = ( annotWrapperId: string, annotId: stri
   // Get the Badge node inside the annotation item
   const annotItemBadgeNode = _getAnnotItemBadgeNode(annotWrapperNode, annotId)
   annotItemBadgeNode.fills = newFills
+  _updateAnnotItemBadgeColor_updateTextColor(annotItemBadgeNode, colorThemeData)
 
   // Get all marker badges on the page.
   const annotMarkerBadgeNodes = getAnnotMarkerBadgeNodes(annotId)
-  for (const node of annotMarkerBadgeNodes) {
-    node.fills = newFills
+  for (const badgeNode of annotMarkerBadgeNodes) {
+    badgeNode.fills = newFills
+    _updateAnnotItemBadgeColor_updateTextColor(badgeNode, colorThemeData)
   }
+}
+
+/**
+ * Update the badge text color on some of the markers.
+ */
+const _updateAnnotItemBadgeColor_updateTextColor = ( badgeNode: InstanceNode, colorThemeData: any ) => {
+  const badgeTextNode = <TextNode>badgeNode.findChild(node => node.type === 'TEXT'),
+        newBadgeTextFills = JSON.parse(JSON.stringify(badgeTextNode.fills))
+        newBadgeTextFills[0].color = generateRGBA(colorThemeData.requiresBlackTextColor 
+          ? { r: 0, g: 0, b: 0 }
+          : { r: 255, g: 255, b: 255 })
+
+  badgeTextNode.fills = newBadgeTextFills
 }
 
 

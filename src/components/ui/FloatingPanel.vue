@@ -20,13 +20,15 @@
         type: String,
         required: true
       }
-    }
+    },
   }
 </script>
 
 <style lang="scss" scoped>
   .floatingPanel {
     width: 200px;
+    max-height: 128px;
+    overflow-y: auto;
     background: $color--background-white;
     border: 0.5px solid $color--special-black-1;
     border-radius: 3px;
@@ -34,6 +36,8 @@
     padding-bottom: 12px;
     position: absolute;
     z-index: 3;
+    top: 32px;
+    left: 0;
 
     &-header {
       display: flex;

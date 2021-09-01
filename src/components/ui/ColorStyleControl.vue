@@ -1,8 +1,7 @@
 <template>
   <div class="colorStyleControl">
     <div 
-      class="control" 
-      
+      class="control"
       :class="{ floatingPanelIsOpened: floatingPanelIsOpened }">
 
       <div class="styleItem" v-tooltip.right="`Select a color for your annotation`" @click="floatingPanelIsOpened = !floatingPanelIsOpened">
@@ -11,28 +10,25 @@
       </div>
 
       <transition name="slideDown">
-      <FloatingPanel v-if="floatingPanelIsOpened" title="Marker Color Themes">
-        <div 
-          class="styleItem"
-          :class="{ isSelected: theme.id == value }"
-          @click="() => selectColorTheme(theme.id)"
-          v-for="(theme, i) in userColorThemes"
-          :key="i">
+        <FloatingPanel v-if="floatingPanelIsOpened" title="Marker Color Themes">
+          <div 
+            class="styleItem"
+            :class="{ isSelected: theme.id == value }"
+            @click="() => selectColorTheme(theme.id)"
+            v-for="(theme, i) in userColorThemes"
+            :key="i">
 
-          <div class="styleItem-colorFill" :style="{ backgroundColor: generateRGBCSSstring({ ...theme.color }) }" />
-          {{ theme.name }}
-        </div>
-      </FloatingPanel>
-    </transition>
+            <div class="styleItem-colorFill" :style="{ backgroundColor: generateRGBCSSstring({ ...theme.color }) }" />
+            {{ theme.name }}
+          </div>
+        </FloatingPanel>
+      </transition>
     </div>
-
-    
   </div>
 </template>
 
 <script>
   import FloatingPanel from '@/components/ui/FloatingPanel'
-
   import { getUserColorThemes } from '@/utils/utils'
 
   export default {
@@ -108,9 +104,6 @@
   }
 
   .floatingPanel {
-    // transform: translateY(calc(-100% + 32px));
-    bottom: calc(100% - 32px);
-
     .styleItem {
       padding-left: 16px;
       min-width: 128px;
