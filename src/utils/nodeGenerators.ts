@@ -32,9 +32,8 @@ export const generateAnnotItemNode = ( data: Annotation, badgeNumber: number ) =
   headerNode.itemSpacing = 8
   headerNode.layoutMode = 'HORIZONTAL'
   headerNode.layoutAlign = 'STRETCH'
-  headerNode.primaryAxisAlignItems = 'MIN'
   headerNode.primaryAxisSizingMode = 'FIXED'
-  headerNode.counterAxisAlignItems = 'MIN'
+  headerNode.counterAxisAlignItems = 'CENTER'
   headerNode.counterAxisSizingMode = 'AUTO'
   headerNode.resize(328, headerNode.height)
 
