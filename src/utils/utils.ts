@@ -16,9 +16,9 @@ export const config = {
    * @returns A few default options for the styling of annotation paragraphs.
    */
   defaultParagraphTextOptions: {
-    fontSize: 14,
-    lineHeight: <LineHeight>{ value: 19, unit: 'PIXELS' },
-    letterSpacing: <LetterSpacing>{ value: 0.5, unit: 'PERCENT' }
+    fontSize: 16,
+    lineHeight: <LineHeight>{ value: 20, unit: 'PIXELS' },
+    letterSpacing: <LetterSpacing>{ value: -0.5, unit: 'PERCENT' }
   },
 
   placeholders: {
