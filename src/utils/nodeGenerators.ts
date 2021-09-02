@@ -20,7 +20,7 @@ export const generateAnnotItemNode = ( data: Annotation, badgeNumber: number ) =
 
   node.name = `Annotation ${data.id}`
   node.resize(343, 100)
-  node.horizontalPadding = 16
+  node.paddingLeft = node.paddingRight = 16
   node.verticalPadding = 16
   node.itemSpacing = 16
   node.layoutMode = 'VERTICAL'
@@ -114,7 +114,7 @@ export const generateAnnotWrapperTitleNode = ( titleValue: string ) => {
   frameNode.layoutMode = 'VERTICAL'
   frameNode.counterAxisSizingMode = 'AUTO'
   frameNode.verticalPadding = 8
-  frameNode.horizontalPadding = 16  
+  frameNode.paddingLeft = frameNode.paddingRight = 16 
   frameNode.layoutAlign = 'STRETCH'
   frameNode.fills = []
 
