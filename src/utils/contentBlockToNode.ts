@@ -28,7 +28,7 @@ const generateParagraphBlock = ( contentBlock: ContentBlock, contentBlocksAmount
   let totalLength = 0
 
   const textNode = generateAnnotItemBodyTextNode()
-  console.clear()
+  // console.clear()
 
   for (const textPart of contentBlock.content) {
     let textPartContent = textPart.type === 'hard_break' 
