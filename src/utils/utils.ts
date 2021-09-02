@@ -90,7 +90,7 @@ export const toggleTextNodePlaceholderStyles = ( textNode: TextNode, title: stri
   if (!placeholder)
     throw new Error(`The given placeholder type "${placeholderType}" does not exist in the config.placeholders list!`)
 
-  textNode.opacity = title.length ? 1 : .25
+  textNode.opacity = title.length ? 1 : 0
   textNode.characters = title || placeholder
 }
 

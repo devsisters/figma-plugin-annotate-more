@@ -24,25 +24,29 @@ export const generateAnnotItemNode = ( data: Annotation, badgeNumber: number ) =
   node.verticalPadding = 16
   node.itemSpacing = 16
   node.layoutMode = 'VERTICAL'
+  node.layoutAlign = 'STRETCH'
   node.locked = true
 
   const headerNode = figma.createFrame()
   headerNode.name = 'Header'
-  headerNode.resize(328, 24)
   headerNode.itemSpacing = 8
   headerNode.layoutMode = 'HORIZONTAL'
+  headerNode.layoutAlign = 'STRETCH'
+  headerNode.primaryAxisAlignItems = 'MIN'
+  headerNode.primaryAxisSizingMode = 'FIXED'
+  headerNode.counterAxisAlignItems = 'MIN'
   headerNode.counterAxisSizingMode = 'AUTO'
+  headerNode.resize(328, headerNode.height)
 
   const headerAnnotBadgeNode = generateAnnotBadgeNode(badgeNumber, data.id)
 
   const headerTextNode = figma.createText()
   toggleTextNodePlaceholderStyles(headerTextNode, data.title, 'annotItemTitle')
   headerTextNode.name = 'Header/Text'
-  headerTextNode.resize(279, headerTextNode.height)
-  headerTextNode.layoutAlign = 'CENTER'
-  headerTextNode.textAlignVertical = 'CENTER'
+  headerTextNode.layoutGrow = 1
   headerTextNode.fontSize = 16
   headerTextNode.fontName = generateFontNameConfig({ isBold: true })
+  headerTextNode.resize(279, headerTextNode.height)
 
   headerNode.appendChild(headerAnnotBadgeNode)
   headerNode.appendChild(headerTextNode)
@@ -50,7 +54,7 @@ export const generateAnnotItemNode = ( data: Annotation, badgeNumber: number ) =
   const bodyNode = figma.createFrame()
   bodyNode.name = 'Body'
   bodyNode.layoutMode = 'VERTICAL'
-  bodyNode.layoutAlign = 'MAX'
+  bodyNode.layoutAlign = 'STRETCH'
   bodyNode.resize(279, bodyNode.height)
   
   node.appendChild(headerNode)
