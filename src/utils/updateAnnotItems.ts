@@ -135,7 +135,7 @@ const _deleteAnnotItem = ( deletedItem: any, annotWrapperNode: FrameNode, annotI
 
   // If the annotWrapper node is empty after removing the itemNode, remove the wrapper too.
   if (!annotItemNodes.length) {
-    annotWrapperNode.remove()
+    annotWrapperNode?.remove()
 
     // Init UI again
     doInit()
@@ -145,7 +145,7 @@ const _deleteAnnotItem = ( deletedItem: any, annotWrapperNode: FrameNode, annotI
   // Get all badge marker items
   const badgeMarkerNodes = getAnnotMarkerBadgeNodes(annotId)
   for (const node of badgeMarkerNodes) {
-    node.remove()
+    node?.remove()
   }
     
   // Update the badge's indexes
@@ -183,7 +183,7 @@ const _handleModifiedItemContent = ( item: any, entryName: string, annotNode: Fr
     
       case 'DELETED':
         // console.log(`REMOVED (line ${i + 1})`, contentBlock)
-        bodyNode.children[figmaNodeListIndex].remove()
+        bodyNode.children[figmaNodeListIndex]?.remove()
         figmaNodeListIndex--
         break
         
@@ -195,7 +195,7 @@ const _handleModifiedItemContent = ( item: any, entryName: string, annotNode: Fr
 
         // Only remove the old block if there is some!
         if (bodyNode.children.length !== 0)
-          bodyNode.children[figmaNodeListIndex].remove()
+          bodyNode.children[figmaNodeListIndex]?.remove()
         
         bodyNode.insertChild(figmaNodeListIndex, modifiedNode)
 
