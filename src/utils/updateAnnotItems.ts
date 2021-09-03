@@ -209,7 +209,7 @@ const _handleModifiedItemContent = ( item: any, entryName: string, annotNode: Fr
 
   bodyNode.visible = true
   if (bodyNode.children.length === 1 && bodyNode.children[0].type === 'TEXT')
-    bodyNode.visible = bodyNode.children[0].characters.trim().length ? true : false
+    bodyNode.visible = bodyNode.children[0]?.characters?.trim()?.length ? true : false
 }
 
 

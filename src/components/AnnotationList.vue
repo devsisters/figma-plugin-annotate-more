@@ -151,7 +151,7 @@
           type: 'pushAnnotWrapperTitleChange', 
           value: { 
             wrapperFrameId: this.selectedWrapperFrameId,
-            newVal: newVal.trim()
+            newVal: newVal && newVal.trim()
           }
         }}, '*')
       },
