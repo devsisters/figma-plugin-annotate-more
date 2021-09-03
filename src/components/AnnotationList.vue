@@ -8,7 +8,7 @@
       @confirm="removeAllAnnotationsInGroup">
 
       <p>
-        This will delete all annotations inside this group. There is no way to get them back later!
+        This will delete all annotations from this frame. There is no way to get them back later!
       </p>
     </Modal>
   
@@ -27,7 +27,7 @@
           class="title-button"
           buttonType="icon"
           @click.native="handleTitleChangeIconClick"
-          v-tooltip.bottom-right="`Click icon or name to edit group name`">
+          v-tooltip.bottom-right="`Click icon or name to edit frame name`">
 
           <Icon iconName="edit" />
         </Button>
@@ -36,7 +36,7 @@
           class="title-button"
           buttonType="icon"
           @click.native="isDeleteConfirmationModalOpened = true"
-          v-tooltip.bottom-right="`Delete this group`">
+          v-tooltip.bottom-right="`Delete this frame`">
 
           <Icon iconName="trash" />
         </Button>
