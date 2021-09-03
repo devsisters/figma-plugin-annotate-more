@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar" :class="{ 'fadeOut': !annotData || !annotData.length }">
     <div class="sidebar-header">
-      <SectionTitle>Groups</SectionTitle>
+      <SectionTitle>Frames</SectionTitle>
       <Button 
         buttonType="icon" 
         :disabled="!annotData || !annotData.length"
@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <div class="sidebar-emptyState" v-else>No annotation-groups<br>on this page.</div>
+    <div class="sidebar-emptyState" v-else>No annotation-frames<br>on this page.</div>
   </div>
 </template>
 
