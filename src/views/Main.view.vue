@@ -106,6 +106,10 @@
             mutations.addAnnotDataNewAnnot(msgValue.createdWrapperNodeId, generateAnnotItemObject())
 
             break
+
+          case 'userFirstOpenedPlugin':
+            mutations.setIsOnboardingViewOpened(true)
+            break
         }
       }
     }

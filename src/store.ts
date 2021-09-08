@@ -6,7 +6,8 @@ export const store = Vue.observable({
   userSelection: [],
   watchAnnotations: false,
   annotData: null,
-  selectedWrapperFrameId: null
+  selectedWrapperFrameId: null,
+  isOnboardingViewOpened: false
 })
 
 
@@ -53,5 +54,7 @@ export const mutations = {
       await Vue.nextTick()
       store.watchAnnotations = true
     }
-  }
+  },
+
+  setIsOnboardingViewOpened: ( newVal: boolean ) => store.isOnboardingViewOpened = newVal
 }

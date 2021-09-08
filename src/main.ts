@@ -8,12 +8,16 @@ import {
 import updateAnnotItems from '@/utils/updateAnnotItems'
 import getAnnotWrapperNode from '@/utils/getAnnotWrapperNode'
 import doInit from '@/utils/doInit'
+import doOnboarding from '@/utils/doOnboarding'
 
 
 figma.showUI(__html__, { 
   width: 590,
   height: 486
 })
+
+
+doOnboarding()
 
 
 const pushSelectionChange = () => figma.ui.postMessage({

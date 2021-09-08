@@ -12,6 +12,11 @@
         class="view"
         v-if="isFeedbackViewOpened"
         @close-view="isFeedbackViewOpened = false" />
+
+      <OnboardingView 
+        class="view"
+        v-if="isOnboardingViewOpened"
+        @close-view="mutations.setIsOnboardingViewOpened(false)" />
     </transition>
 
     <FloatingButton 
@@ -33,25 +38,30 @@
   import '@/scss/tooltip.scss'
   import '@/scss/main.scss'
 
-  import { store } from '@/store'
+  import { store, mutations } from '@/store'
   import FloatingButton from '@/components/ui/FloatingButton'
   
-
   // Views
   import MainView from '@/views/Main.view.vue'
   import AboutView from '@/views/About.view.vue'
   import FeedbackView from '@/views/Feedback.view.vue'
-
+  import OnboardingView from '@/views/Onboarding.view.vue'
 
   export default {
     name: "App",
 
-    components: { MainView, AboutView, FeedbackView, FloatingButton },
+    components: { MainView, AboutView, FeedbackView, FloatingButton, OnboardingView },
 
     data: () => ({
       isAboutViewOpened: false,
       isFeedbackViewOpened: false
-    })
+    }),
+
+    computed: {
+      isOnboardingViewOpened() {
+        return store.isOnboardingViewOpened
+      }
+    }
   };
 </script>
 
