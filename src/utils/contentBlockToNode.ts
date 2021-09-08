@@ -46,8 +46,6 @@ const generateParagraphBlock = ( contentBlock: ContentBlock, contentBlocksAmount
       textNode.setRangeTextDecoration(start, end, textDecoration)
 
       if (linkHref) {
-        console.log(textPart, { linkHref, start, end} )
-
         textNode.setRangeHyperlink(start, end - 1, linkHref)
       }
     }
