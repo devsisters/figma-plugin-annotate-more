@@ -6,7 +6,7 @@
       <AboutView 
         class="view"
         v-if="isAboutViewOpened"
-        @close-view="isAboutViewOpened = false" />
+        @close-view="handleCloseAboutView" />
 
       <FeedbackView 
         class="view"
@@ -60,6 +60,14 @@
     computed: {
       isOnboardingViewOpened() {
         return store.isOnboardingViewOpened
+      }
+    },
+
+    methods: {
+      handleCloseAboutView({ openOnboarding } = {}) {
+        this.isAboutViewOpened = false
+        if (openOnboarding) 
+          mutations.setIsOnboardingViewOpened(true)
       }
     }
   };

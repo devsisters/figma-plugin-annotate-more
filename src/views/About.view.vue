@@ -1,13 +1,16 @@
 <template>
   <div class="aboutView scrollContainer">
-    <a @click="$emit('close-view')" href="#">&larr; Back</a>
+    <div class="aboutView_linkContainer">
+      <a @click="$emit('close-view')" href="#">&larr; Back</a>
+      <a @click="$emit('close-view', { openOnboarding: true })" href="#">View intro tutorial</a>
+    </div>
 
     <SectionTitle>Help</SectionTitle>
     <ul>
       <li>Select a frame on your figma page to add annotation to.</li>
-      <li>Click <b>Add New</b> button to add an annotation.</li>
+      <li>Click <b>Create annotation</b> button to add an annotation to the selected frame.</li>
       <li>Select a color for your marker if you’d like to create annotations for different purposes.</li>
-      <li>Click on the <span class="inlineIconWrap"><Icon iconName="trash" /></span> button to remove an annotation (the numbers will update auto-magically).</li>
+      <li>Click on the <span class="inlineIconWrap"><Icon iconName="trash" /></span> button to delete an annotation (the numbers will update auto-magically).</li>
       <li>
         You can also use some <b>Markdown</b> for formatting your annotation description:
         <ul>
@@ -27,9 +30,27 @@
             <u>Underline</u>
             <span>with <b><kbd>CMD</kbd> + <kbd>U</kbd></b></span>
           </li>
+          <li>
+            <span>Links</span>
+          </li>
           <li><span class="mark">-</span> Unordered List<br></li>
           <li><span class="mark">1.</span> Ordered List</li>
           <li><span class="mark">---</span> Divider</li>
+        </ul>
+      </li>
+      <li>Click on the <span class="inlineIconWrap"><Icon iconName="edit" /></span> button to rename your frame group (does not rename the original frame name)</li>
+      <li>
+        To create annotations on other frame(s):
+        <ul>
+          <li>Select another frame on your figma page</li>
+          <li>Click the <span class="inlineIconWrap"><Icon iconName="plus" /></span> button</li>
+        </ul>
+      </li>
+      <li>
+        To delete annotations from other frame(s):
+        <ul>
+          <li>Select the frame group from the plugin</li>
+          <li>Click the “trash” button to delete all the annotations from that frame (this action cannot be undone)</li>
         </ul>
       </li>
     </ul>
@@ -57,6 +78,12 @@
 <style lang="scss" scoped>
   .aboutView {
     overflow-y: scroll;
+
+    &_linkContainer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
     
     kbd {
       background: $color--background-silver;
