@@ -125,10 +125,10 @@
 
     &[buttonType^=tertiary] {
       background: $color--background-white;
-      transition: opacity 150ms ease;
       box-shadow: none;
       cursor: pointer;
       padding: 0;
+      color: $color--blue;
 
       &:disabled {
         color: $color--black-3;
