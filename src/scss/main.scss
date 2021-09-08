@@ -140,3 +140,14 @@ p a, ol a, ul a {
 .slideDown-leave-active {
   transform: translateY(-1em);
 }
+
+
+
+.inlineIconWrap {
+  height: 16px; //same as line-height;
+  margin-top: -16px;
+  transform: translateY(10px) translateX(8px);
+  display: inline-flex;
+  align-items: center;
+  margin-left: -16px;
+}

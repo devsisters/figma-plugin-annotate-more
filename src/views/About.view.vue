@@ -57,16 +57,7 @@
 <style lang="scss" scoped>
   .aboutView {
     overflow-y: scroll;
-
-    .inlineIconWrap {
-      height: 16px; //same as line-height;
-      margin-top: -16px;
-      transform: translateY(10px) translateX(8px);
-      display: inline-flex;
-      align-items: center;
-      margin-left: -16px;
-    }
-
+    
     kbd {
       background: $color--background-silver;
       border-radius: 3px;
