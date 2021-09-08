@@ -38,6 +38,12 @@
         <button :class="{ 'is-active': isActive.underline() }" @click="commands.underline">
           <u>U</u>
         </button>
+
+        <button :class="{ 'is-active': isActive.link() }" @click="toggleLink">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#fff" d="M6.00012 12C6.00012 10.8954 6.89555 10 8.00012 10H10.0001V9H8.00012C6.34327 9 5.00012 10.3431 5.00012 12C5.00012 13.6569 6.34327 15 8.00012 15H10.0001V14H8.00012C6.89555 14 6.00012 13.1046 6.00012 12ZM14.0001 10V9H16.0001C17.657 9 19.0001 10.3431 19.0001 12C19.0001 13.6569 17.657 15 16.0001 15H14.0001V14H16.0001C17.1047 14 18.0001 13.1046 18.0001 12C18.0001 10.8954 17.1047 10 16.0001 10H14.0001ZM9.00012 12.5H15.0001V11.5H9.00012V12.5Z" />
+          </svg>
+        </button>
       </div>
     </editor-menu-bubble>
 
@@ -129,6 +135,25 @@ export default {
       const newValue = getJSON().content
       this.$emit('input', newValue)
     })
+  },
+
+  methods: {
+    toggleLink() {
+      const { selection, state } = this.editor
+      const text = state.doc.textBetween(selection.from, selection.to, ' ')
+
+      const isLink = this.editor.isActive.link()
+      let href = isLink ? null : text
+
+      try {
+        if (href)
+          new URL(href)
+      } catch (e) {
+        href = null
+      }
+
+      this.editor.commands.link({ href })
+    }
   },
 
   beforeDestroy() {
