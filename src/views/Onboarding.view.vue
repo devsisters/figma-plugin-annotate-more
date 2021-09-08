@@ -3,20 +3,20 @@
 		<tiny-slider v-bind="sliderOptions" @indexChanged="handleIndexChanged">
 			<div class="slide-item">
 				<img 
-					src="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/v2/static/onboarding_confetti.svg" 
+					src="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/master/static/onboarding_confetti.svg" 
 					aria-hidden="true" 
 					class="slide-item__confetti isLeft"
 				/>
 
 				<img 
-					src="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/v2/static/onboarding_confetti.svg" 
+					src="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/master/static/onboarding_confetti.svg" 
 					aria-hidden="true" 
 					class="slide-item__confetti isRight"
 				/>
 
 				<img 
-					src="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/v2/static/onboarding_slide_1.jpg"
-					srcset="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/v2/static/onboarding_slide_1@2x.jpg 2x"
+					src="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/master/static/onboarding_slide_1.jpg"
+					srcset="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/master/static/onboarding_slide_1@2x.jpg 2x"
 					class="slide-item__image"
 					loading="lazy"
 				/>
@@ -26,8 +26,8 @@
 
 			<div class="slide-item">
 				<img 
-					src="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/v2/static/onboarding_slide_2.jpg"
-					srcset="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/v2/static/onboarding_slide_2@2x.jpg 2x"
+					src="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/master/static/onboarding_slide_2.jpg"
+					srcset="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/master/static/onboarding_slide_2@2x.jpg 2x"
 					class="slide-item__image"
 					loading="lazy"
 				/>
@@ -40,8 +40,8 @@
 
 			<div class="slide-item">
 				<img 
-					src="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/v2/static/onboarding_slide_3.jpg"
-					srcset="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/v2/static/onboarding_slide_3@2x.jpg 2x"
+					src="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/master/static/onboarding_slide_3.jpg"
+					srcset="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/master/static/onboarding_slide_3@2x.jpg 2x"
 					class="slide-item__image"
 					loading="lazy"
 				/>
@@ -54,8 +54,8 @@
 
 			<div class="slide-item">
 				<img 
-					src="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/v2/static/onboarding_slide_4.jpg"
-					srcset="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/v2/static/onboarding_slide_4@2x.jpg 2x"
+					src="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/master/static/onboarding_slide_4.jpg"
+					srcset="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/master/static/onboarding_slide_4@2x.jpg 2x"
 					class="slide-item__image"
 					loading="lazy"
 				/>
@@ -69,8 +69,8 @@
 
 			<div class="slide-item">
 				<img 
-					src="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/v2/static/onboarding_slide_5.jpg"
-					srcset="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/v2/static/onboarding_slide_5@2x.jpg 2x"
+					src="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/master/static/onboarding_slide_5.jpg"
+					srcset="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/master/static/onboarding_slide_5@2x.jpg 2x"
 					class="slide-item__image"
 					loading="lazy"
 				/>
@@ -83,8 +83,8 @@
 
 			<div class="slide-item">
 				<img 
-					src="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/v2/static/onboarding_slide_6.jpg"
-					srcset="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/v2/static/onboarding_slide_6@2x.jpg 2x"
+					src="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/master/static/onboarding_slide_6.jpg"
+					srcset="https://raw.githubusercontent.com/madebyfabian/figma-plugin-annotate-it/master/static/onboarding_slide_6@2x.jpg 2x"
 					class="slide-item__image"
 					loading="lazy"
 				/>
