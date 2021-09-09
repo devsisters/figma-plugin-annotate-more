@@ -2,7 +2,7 @@ import Vue from "vue"
 
 
 export const store = Vue.observable({
-  functionsBaseUrl: 'https://annotate-it-functions.netlify.app/.netlify/functions',
+  functionsBaseUrl: 'https://netlify-functions-madebyfabian.netlify.app/.netlify/functions',
   userSelection: [],
   watchAnnotations: false,
   annotData: null,
