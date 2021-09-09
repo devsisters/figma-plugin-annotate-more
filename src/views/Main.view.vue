@@ -132,6 +132,7 @@
       border-radius: 16px 0 0 16px;
       overflow: hidden;
       box-shadow: var(--shadow);
+      position: relative;
     
       .emptyState {
         // padding: 16px;

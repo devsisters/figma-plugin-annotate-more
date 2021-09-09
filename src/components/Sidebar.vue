@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar" :class="{ 'fadeOut': !annotData || !annotData.length }">
-    <div class="sidebar-header">
+    <div class="sidebar-header" :class="{ 'hasBorder': sidebarIsScrolled }">
       <SectionTitle>Frames</SectionTitle>
       <Button 
         buttonType="icon" 
@@ -12,7 +12,7 @@
       </Button>
     </div>
 
-    <div class="sidebar-frames" v-if="annotData && annotData.length">
+    <div class="sidebar-frames scrollContainer" v-if="annotData && annotData.length" @scroll="handleSidebarScroll">
       <div
         class="sidebar-frameItem"
         v-for="(annotWrapperFrame, i) in annotData"
@@ -39,7 +39,8 @@
     components: { SectionTitle, Button, Icon },
 
     data: () => ({
-      placeholders: config.placeholders
+      placeholders: config.placeholders,
+      sidebarIsScrolled: false
     }),
 
     computed: {
@@ -53,6 +54,11 @@
           type: 'createAnnotGroup', 
           value: {}
         }}, '*')
+      },
+
+      handleSidebarScroll(e) {
+        const isOnTop = e.target.scrollTop === 0
+        this.sidebarIsScrolled = !isOnTop
       }
     }
   }
@@ -64,15 +70,30 @@
       opacity: .25;
     }
 
+    --height-sidebar-header: 52px;
+
     &-header {
       padding: 12px 16px 8px;
       display: flex;
       justify-content: space-between;
+      height: var(--height-sidebar-header);
+      border-bottom: 1px solid transparent;
+      transition: border-color 150ms ease;
+
+      &.hasBorder {
+        border-color: $color--background-silver;
+      }
 
       button {
         margin-right: -8px;
         background: transparent;
       }
+    }
+
+    &-frames {
+      max-height: calc(100vh - var(--height-sidebar-header));
+      padding-bottom: 4rem;
+      overflow-y: auto;
     }
 
     &-emptyState {
