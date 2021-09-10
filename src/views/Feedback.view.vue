@@ -56,11 +56,9 @@
     methods: {
       async sendFeedback() {
         const template = `
-          <table>
-            <tr><td style="width: 90px;"><b>Name</b></td><td>${this.feedbackData.name || 'Unknown'}</td></tr>
-            <tr><td style=""><b>E-Mail</b></td><td>${this.feedbackData.email || 'Unknown'}</td></tr>
-            <tr><td style="vertical-align: top"><b>Feedback</b></td><td>${this.feedbackData.message.replace(/(?:\r\n|\r|\n)/g, '<br>')}</td></tr>
-          </table>
+          Name: ${this.feedbackData.name || 'Unknown'}\n
+          Email: ${this.feedbackData.email || 'Unknown'}\n
+          Feedback: ${this.feedbackData.message}
         `
 
         if (this.feedbackData.message.length === 0) {
