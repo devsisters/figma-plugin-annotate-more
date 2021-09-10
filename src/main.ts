@@ -53,7 +53,7 @@ figma.ui.on('message', async msg => {
 
 		case 'createAnnotGroup': {
 			if (figma.currentPage.selection.length !== 1) {
-				figma.notify('😄 Please try again by selecing exactly 1 frame!')
+				figma.notify('😄 Please try again by selecting exactly 1 frame!')
 				break
 			}
 
