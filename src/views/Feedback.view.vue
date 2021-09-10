@@ -55,12 +55,6 @@
 
     methods: {
       async sendFeedback() {
-        const template = `
-          Name: ${this.feedbackData.name || 'Unknown'}\n
-          Email: ${this.feedbackData.email || 'Unknown'}\n
-          Feedback: ${this.feedbackData.message}
-        `
-
         if (this.feedbackData.message.length === 0) {
           this.isNotFilled = true
           return
@@ -71,7 +65,9 @@
         try {
           const res = await fetch(store.functionsBaseUrl +  '/annotate-it-send-feedback', {
             method: 'POST',
-            body: JSON.stringify({ template })
+            body: JSON.stringify({
+              ...this.feedbackData
+            })
           })
 
           const data = res.json()
