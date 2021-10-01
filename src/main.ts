@@ -84,5 +84,15 @@ figma.ui.on('message', async msg => {
 
 			break
 		}
+
+		case "focusFrame": {
+			let node = figma.getNodeById(msgValue.figmaFrameId)
+			if (node.type === 'DOCUMENT' || node.type === 'PAGE') {
+				return;
+			}
+			figma.currentPage.selection = [node]
+			figma.viewport.scrollAndZoomIntoView([node])
+			break
+		}
 	}
 })

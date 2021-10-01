@@ -40,6 +40,15 @@
 
           <Icon iconName="trash" />
         </Button>
+        
+        <Button
+          class="title-button"
+          buttonType="icon"
+          @click.native="focusFrame(allData.pluginData.connectedFrameId)"
+          v-tooltip.bottom-right="`Focus this frame`">
+
+          <Icon iconName="eye" />
+        </Button>
       </div>
 
       <Button 
@@ -143,6 +152,15 @@
         this.$setFocusVisible(true)
         this.$refs.titleContent.focus();
       },
+
+      focusFrame(figmaFrameId) {
+        parent.postMessage({ pluginMessage: {
+          type: 'focusFrame', 
+          value: { 
+            figmaFrameId
+          }
+        }}, '*')
+      }
     },
 
     watch: {
@@ -248,13 +266,12 @@
         }
 
         &-button {
-          margin: -8px 0;
+          margin: -8px 0 -8px 8px;
           z-index: 2;
           position: relative;
 
           &:first-of-type {
             margin-left: -32px;
-            margin-right: 8px;
           }
 
           .icon {
