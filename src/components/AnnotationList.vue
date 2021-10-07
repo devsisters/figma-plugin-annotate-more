@@ -45,9 +45,9 @@
           class="title-button"
           buttonType="icon"
           @click.native="focusFrame(allData.pluginData.connectedFrameId)"
-          v-tooltip.bottom-right="`Focus this frame`">
+          v-tooltip.bottom-right="`View this frame`">
 
-          <Icon iconName="eye" />
+          <Icon iconName="locate" />
         </Button>
       </div>
 
