@@ -97,8 +97,8 @@ const generateListBlock = ( contentBlock: ContentBlock, nestingLevel: number) =>
     // Either the dot or the 1., 2., 3...
     const listItemKeyNode = figma.createText()
     listItemKeyNode.name = 'Key'
-    listItemKeyNode.resize(14, listItemKeyNode.height)
-    listItemKeyNode.textAlignHorizontal = isBulletList ? 'CENTER' : 'RIGHT'
+    listItemKeyNode.resize(23, listItemKeyNode.height)
+    listItemKeyNode.textAlignHorizontal = 'CENTER'
     listItemKeyNode.characters = isBulletList ? _getBullet(nestingLevel) : `${i + 1}.`
     listItemKeyNode.fontSize = isBulletList ? 18 : config.defaultParagraphTextOptions.fontSize
     listItemKeyNode.lineHeight = config.defaultParagraphTextOptions.lineHeight
