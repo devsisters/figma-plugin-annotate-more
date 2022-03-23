@@ -165,7 +165,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .editor /deep/ p.is-editor-empty:first-child::before {
+  .editor ::v-deep p.is-editor-empty:first-child::before {
     content: attr(data-empty-text);
     color: $color--black-3;
     pointer-events: none;
@@ -267,7 +267,7 @@ export default {
     }
 
     &-content {
-      /deep/ {
+      ::v-deep {
         overflow-wrap: break-word;
         word-wrap: break-word;
         word-break: break-word;

@@ -160,7 +160,7 @@
 		right: $space;
 	}
 
-	/deep/ {
+	::v-deep {
 		.tns-visually-hidden {
 			position: absolute;
 			width: 1px;

@@ -92,7 +92,7 @@
         background: $color--red;
       }
 
-      /deep/ * {
+      ::v-deep * {
         color: $color--white;
       }
 
@@ -118,7 +118,7 @@
 
       &:disabled {
         color: $color--black-3;
-        /deep/ * { color: $color--black-3 }
+        ::v-deep * { color: $color--black-3 }
         box-shadow: inset 0 0 0 1px $color--black-3;
       }
     }
@@ -132,7 +132,7 @@
 
       &:disabled {
         color: $color--black-3;
-        /deep/ * { color: $color--black-3 }
+        ::v-deep * { color: $color--black-3 }
       }
     }
 
@@ -141,7 +141,7 @@
       box-shadow: none;
       width: 32px;
       padding: 0;
-      // /deep/ * {
+      // ::v-deep * {
       //   color: $color--blue;
       // }
 
@@ -156,7 +156,7 @@
         
         &.isActive {
           background: $color--blue;
-          /deep/ * {
+          ::v-deep * {
             color: $color--white;
           }
           
@@ -167,7 +167,7 @@
       }
 
       &:disabled {
-        /deep/ * {
+        ::v-deep * {
           color: $color--black-3;
         }
       }
@@ -176,7 +176,7 @@
     &[buttonType=iconDraggable] {
       width: 24px;
 
-      /deep/ svg {
+      ::v-deep svg {
         transform: translateX(4px);
       }
 

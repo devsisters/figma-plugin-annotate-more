@@ -78,7 +78,7 @@ export const generateFontNameConfig = ({ isBold = false, isItalic = false } = {}
       style += ' Italic'
   }
 
-  return <FontName>{ family: 'Roboto', style }
+  return <FontName>{ family: 'Inter', style }
 }
 
 

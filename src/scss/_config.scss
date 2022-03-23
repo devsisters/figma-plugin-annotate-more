@@ -29,9 +29,6 @@ $_fontWeights: ( "regular": 400, "medium": 500, "bold": 600 );
   }
 }
 
-:export {
-  fontWeights: #{$_fontWeights}
-}
 
 
 $color--blue: var(--color--blue);

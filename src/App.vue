@@ -101,7 +101,7 @@
     z-index: 9999;
 
     user-select: text!important;
-    /deep/ * {
+    ::v-deep * {
       user-select: text!important;
     }
   }

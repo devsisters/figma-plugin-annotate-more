@@ -115,7 +115,7 @@
       transition: opacity 150ms ease;
       margin-left: 8px;
       
-      /deep/ * {
+      ::v-deep * {
         color: $color--black-3!important;
       }
     }
@@ -150,7 +150,7 @@
       grid-row: 2 / 3;
       position: relative;
 
-      /deep/ .editor {
+      ::v-deep .editor {
         // padding: 12px 8px;
         
         *[contenteditable=true] {
