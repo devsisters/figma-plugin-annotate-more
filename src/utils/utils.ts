@@ -90,6 +90,9 @@ export const toggleTextNodePlaceholderStyles = ( textNode: TextNode, title: stri
   if (!placeholder)
     throw new Error(`The given placeholder type "${placeholderType}" does not exist in the config.placeholders list!`)
 
+  // Override the font that may be in there. Since figma on about 23 march 2022 updated their default font from roboto to inter
+  // causing the plugin to crash. And some users will have old title nodes with roboto, so we need to override it.
+  textNode.fontName = generateFontNameConfig({ isBold: true })
   textNode.opacity = title?.length ? 1 : 0
   textNode.characters = title || placeholder
 }
