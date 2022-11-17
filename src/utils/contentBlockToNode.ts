@@ -40,10 +40,15 @@ const generateParagraphBlock = ( contentBlock: ContentBlock, contentBlocksAmount
 
     if (textPart.type === 'text') {
       const end = totalLength + textPartContent.length,
-            { fontName, textDecoration, linkHref } = _getTextMarkOptions(textPart?.marks)
+            { fontName, textDecoration, linkHref, textColor } = _getTextMarkOptions(textPart?.marks)
 
       textNode.setRangeFontName(start, end, fontName)
       textNode.setRangeTextDecoration(start, end, textDecoration)
+      const textColorRGB = _hexToRGB(textColor)
+      textNode.setRangeFills(start, end, [{
+        type: "SOLID",
+        color: textColorRGB,
+      }]);
 
       if (linkHref) {
         textNode.setRangeHyperlink(start, end - 1, linkHref)
@@ -138,9 +143,10 @@ const _getTextMarkOptions = ( marks: Mark[] ) => {
   let isBold = false,
       isItalic = false,
       textDecoration: TextDecoration = 'NONE',
-      linkHref: HyperlinkTarget = null
+      linkHref: HyperlinkTarget = null,
+      textColor: string = '#123456';
 
-  if (marks)
+  if(marks)
     for (const mark of marks) {
       switch (mark.type) {
         case 'bold': isBold = true; break
@@ -148,13 +154,15 @@ const _getTextMarkOptions = ( marks: Mark[] ) => {
         case 'underline': textDecoration = 'UNDERLINE'; break
         case 'strike': if (textDecoration === 'NONE') textDecoration = 'STRIKETHROUGH'; break
         case 'link': linkHref = { type: 'URL', value: mark.attrs.href }; textDecoration = 'UNDERLINE'; break
+        case 'textStyle': textColor = mark.attrs.color; break;
       }
     }
 
   return {
     fontName: generateFontNameConfig({ isBold, isItalic }),
     textDecoration,
-    linkHref
+    linkHref,
+    textColor,
   }
 }
 
@@ -173,3 +181,12 @@ const _getBullet = ( nestingLevel: number ) => {
     default:  return '◦'
   }
 }
+
+  const _hexToRGB = (hex: string) => {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16)/255,
+      g: parseInt(result[2], 16)/255,
+      b: parseInt(result[3], 16)/255,
+    } : null;
+  };

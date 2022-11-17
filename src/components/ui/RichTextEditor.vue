@@ -10,6 +10,10 @@
           @input="editor.chain().focus().setColor($event.target.value).run()"
           :value="editor.getAttributes('textStyle').color"
       >
+<!--   원하는 색깔 정적으로 추가 할 것   -->
+<!--      <button @click="editor.chain().focus().setColor('#FF5F00').run()" :class="{ 'is-active': editor.isActive('textStyle', { color: '#958DF1' })}">-->
+<!--        devOrange-->
+<!--      </button>-->
       <button @click="editor.chain().focus().toggleBold().run()" :class="{ 'is-active': editor.isActive('bold') }">
         bold
       </button>
