@@ -1,165 +1,80 @@
 <template>
   <div class="editor">
-    <editor-floating-menu :editor="editor" v-slot="{ commands, menu }">
-      <div
-        class="editor-floatingMenu"
-        :class="{ 'is-active': menu.isActive }"
-        :style="`top: ${menu.top}px`">
-
-        <button
-          v-for="(item, i) of floatingMenuItems"
-          :key="i"
-          @click="() => commands[item.commandName]()"
-          v-tooltip.top-center="item.title">
-
-          <svg v-html="item.icon" />
-        </button>
-      </div>
-    </editor-floating-menu>
-
-    <editor-menu-bubble :editor="editor" :keep-in-bounds="keepInBounds" v-slot="{ commands, isActive, menu }">
-      <div
-        class="editor-menuBubble"
-        :class="{ 'is-active': menu.isActive }"
-        :style="`left: ${menu.left}px; bottom: ${menu.bottom}px;`">
-
-        <button :class="{ 'is-active': isActive.bold() }" @click="commands.bold">
-          <b>B</b>
-        </button>
-
-        <button :class="{ 'is-active': isActive.italic() }" @click="commands.italic">
-          <i>i</i>
-        </button>
-
-        <button :class="{ 'is-active': isActive.strike() }" @click="commands.strike">
-          <s>S</s>
-        </button>
-
-        <button :class="{ 'is-active': isActive.underline() }" @click="commands.underline">
-          <u>U</u>
-        </button>
-
-        <button :class="{ 'is-active': isActive.link() }" @click="toggleLink">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#fff" d="M6.00012 12C6.00012 10.8954 6.89555 10 8.00012 10H10.0001V9H8.00012C6.34327 9 5.00012 10.3431 5.00012 12C5.00012 13.6569 6.34327 15 8.00012 15H10.0001V14H8.00012C6.89555 14 6.00012 13.1046 6.00012 12ZM14.0001 10V9H16.0001C17.657 9 19.0001 10.3431 19.0001 12C19.0001 13.6569 17.657 15 16.0001 15H14.0001V14H16.0001C17.1047 14 18.0001 13.1046 18.0001 12C18.0001 10.8954 17.1047 10 16.0001 10H14.0001ZM9.00012 12.5H15.0001V11.5H9.00012V12.5Z" />
-          </svg>
-        </button>
-      </div>
-    </editor-menu-bubble>
+    <bubble-menu
+        :editor="editor"
+        :tippy-options="{ duration: 100 }"
+        v-if="editor"
+    >
+      <input
+          type="color"
+          @input="editor.chain().focus().setColor($event.target.value).run()"
+          :value="editor.getAttributes('textStyle').color"
+      >
+      <button @click="editor.chain().focus().toggleBold().run()" :class="{ 'is-active': editor.isActive('bold') }">
+        bold
+      </button>
+      <button @click="editor.chain().focus().toggleItalic().run()" :class="{ 'is-active': editor.isActive('italic') }">
+        italic
+      </button>
+      <button @click="editor.chain().focus().toggleStrike().run()" :class="{ 'is-active': editor.isActive('strike') }">
+        strike
+      </button>
+    </bubble-menu>
 
     <editor-content class="editor-content" :editor="editor" />
   </div>
 </template>
 
 <script>
-import { Editor, EditorContent, EditorMenuBubble, EditorFloatingMenu } from 'tiptap'
-import { HardBreak, OrderedList, BulletList, ListItem, Bold, Italic, Strike, Underline, HorizontalRule, Placeholder, History, Link } from 'tiptap-extensions'
+import StarterKit from '@tiptap/starter-kit'
+import { BubbleMenu, Editor, EditorContent } from '@tiptap/vue-2'
+import { Color } from '@tiptap/extension-color'
+import TextStyle from '@tiptap/extension-text-style'
 
 export default {
   props: {
     value: Array,
-    isSkeleton: {
-      type: Boolean,
-      default: false
-    }
   },
 
   components: {
     EditorContent,
-    EditorMenuBubble,
-    EditorFloatingMenu
+    BubbleMenu,
   },
 
-  data: function() {
+  data() {
     return {
-      keepInBounds: true,
-      editable: !this.isSkeleton,
-
-      editor: new Editor({
-        extensions: [
-          new HardBreak(),
-          new BulletList(),
-          new OrderedList(),
-          new ListItem(),
-          new Bold(),
-          new Italic(),
-          new Strike(),
-          new Underline(),
-          new History(),
-          new HorizontalRule(),
-          new Link({
-            openOnClick: false
-          }),
-          new Placeholder({
-            emptyEditorClass: 'is-editor-empty',
-            emptyNodeClass: 'is-empty',
-            emptyNodeText: 'Your annotation Description goes here.\nYou can format the text with Markdown like\n**bold** or _italic_, - unordered, 1. ordered, --- divider',
-            showOnlyWhenEditable: true,
-            showOnlyCurrent: true,
-          })
-        ],
-        content: {
-          type: 'doc',
-          content: this.value,
-        }
-      }),
-
-      floatingMenuItems: [
-        {
-          title: 'Bullet list',
-          commandName: 'bullet_list',
-          icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                  <path fill="#000" fill-opacity=".8" fill-rule="evenodd" d="M8 6.5H6v1h2v-1zm0 10H6v1h2v-1zm-2-5h2v1H6v-1zm12-5h-8v1h8v-1zm-8 10h8v1h-8v-1zm8-5h-8v1h8v-1z" clip-rule="evenodd"/>
-                </svg>`
-        },
-        {
-          title: 'Numbered list',
-          commandName: 'ordered_list',
-          icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                  <path fill="#000" fill-opacity=".8" fill-rule="evenodd" d="M7.06 5.5h.582v2.92h-.618V6.087h-.017l-.67.42v-.548l.724-.458zM18 6.413H9.96v1.004H18V6.413zm0 10.04H9.96v1.003H18v-1.004zm-8.04-5.02H18v1.003H9.96v-1.004zM6.102 13.44h2.084v-.505H6.958v-.02l.426-.417c.601-.548.763-.822.763-1.154 0-.506-.414-.864-1.04-.864-.615 0-1.036.366-1.034.94h.586c-.001-.28.176-.451.443-.451.257 0 .448.16.448.416 0 .233-.143.393-.408.648l-1.04.962v.445zm2.133 4.2c.001.5-.468.86-1.125.86-.642 0-1.099-.355-1.109-.866h.622c.012.214.216.357.489.357.282 0 .482-.16.48-.392.002-.236-.205-.401-.536-.401h-.273v-.454h.273c.281 0 .477-.155.475-.384.002-.22-.165-.371-.415-.371-.253 0-.457.144-.464.366h-.592c.008-.505.46-.855 1.059-.855.605 0 1.009.362 1.007.822.002.328-.224.56-.55.618v.023c.43.054.66.313.659.677z" clip-rule="evenodd"/>
-                </svg>`
-        },
-        {
-          title: 'Seperator',
-          commandName: 'horizontal_rule',
-          icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                  <path stroke="#000" d="M6 12h5M13 12h5"/>
-                </svg>`
-        }
-      ]
+      editor: null,
+      isEditable: true,
     }
+  },
+
+  watch: {
+    isEditable(value) {
+      this.editor.setEditable(value)
+    },
   },
 
   mounted() {
-    this.editor.on('update', ({ getJSON }) => {
-      const newValue = getJSON().content
-      this.$emit('input', newValue)
+    this.editor = new Editor({
+      extensions: [
+        StarterKit,
+        TextStyle,
+        Color,
+      ],
+      content: {
+        type: 'doc',
+        content: this.value,
+      },
+    })
+
+    this.editor.on('update', () => {
+      console.log(this.value);
+      this.$emit('input', this.value);
     })
   },
 
-  methods: {
-    toggleLink() {
-      const { selection, state } = this.editor
-      const text = state.doc.textBetween(selection.from, selection.to, ' ')
-
-      const isLink = this.editor.isActive.link()
-      let href = isLink ? null : text
-
-      try {
-        if (href)
-          new URL(href)
-      } catch (e) {
-        href = null
-      }
-
-      this.editor.commands.link({ href })
-    }
-  },
-
-  beforeDestroy() {
-    setTimeout(() => {
-      this.editor.destroy()
-    }, 300);
+  beforeUnmount() {
+    this.editor.destroy()
   },
 }
 </script>
