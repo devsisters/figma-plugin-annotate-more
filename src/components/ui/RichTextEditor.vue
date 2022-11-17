@@ -67,8 +67,8 @@ export default {
       },
     })
 
-    this.editor.on('update', () => {
-      console.log(this.value);
+    this.editor.on('update', ({ editor }) => {
+      this.value = editor.getJSON().content;
       this.$emit('input', this.value);
     })
   },
